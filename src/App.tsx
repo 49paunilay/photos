@@ -106,6 +106,7 @@ function App() {
 
   useEffect(() => {
     document.body.classList.toggle("dark", darkMode);
+    // document.button.classList.toogle("dark",darkMode)
   }, [darkMode]);
 
   return (

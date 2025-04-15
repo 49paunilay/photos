@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Card from "./components/Card";
+import Modal from "./components/Modal";
 
 const data = [
   {
@@ -103,10 +104,19 @@ const data = [
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string|null>(null);
+
+
+  const handleImageClick = (imgSrc:string) => {
+    console.log("Handle images is called")
+    setSelectedImage(imgSrc);
+    setShowModal(true);
+  };
+
 
   useEffect(() => {
     document.body.classList.toggle("dark", darkMode);
-    // document.button.classList.toogle("dark",darkMode)
   }, [darkMode]);
 
   return (
@@ -116,9 +126,18 @@ function App() {
       </button>
       <div className="masonary">
         {data.map((item, index) => {
-          return <Card image={item.image} title={item.title} key={index} />;
+          return <Card image={item.image} title={item.title} key={index} onClick={()=>{
+            console.log("Called in level 1")
+            handleImageClick(item.image)
+          }}/>;
         })}
       </div>
+
+      <Modal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        imageSrc={selectedImage}
+      />
     </>
   );
 }

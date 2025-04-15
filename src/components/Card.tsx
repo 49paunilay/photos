@@ -1,10 +1,10 @@
 import "./Card.css"
 
 
-const Card = ({image,title}:{image:string,title:string}) => {
+const Card = ({image,title,onClick}:{image:string,title:string,onClick:()=>void}) => {
   return (
     <div className='card'>
-        <img src={image} alt={title}/>
+        <img src={image} alt={title} onClick={onClick}/>
         <h3>{title}</h3>
     </div>
   )
